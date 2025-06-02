@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio - Deenadhayalan B</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #121212;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #1e1e1e;
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .container {
+      width: 85%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-size: 24px;
+      color: #ff0057;
+      font-weight: 700;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    /* Updated hero styling */
+    .hero {
+      padding-top: 50px; /* Added top padding */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hero-text {
+      max-width: 50%;
+      z-index: 1;
+      position: relative;
+    }
+
+    .hero-text h1 {
+      font-size: 48px;
+      color: #fff;
+    }
+
+    .hero-text span {
+      color: #ff0057;
+    }
+
+    .hero-text p {
+      margin: 20px 0;
+    }
+
+    .btn {
+      background: #ff0057;
+      color: #fff;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    /* Make image full viewport width and break out from container sides */
+    .hero img {
+      width: 100vw; /* full viewport width */
+      max-width: none; /* override container limit */
+      margin-left: calc(-50vw + 42.5%); /* shift left to cover sides */
+      height: auto;
+      border-radius: 20px;
+      object-fit: cover;
+      opacity: 0.7;
+      display: block;
+      z-index: 0;
+      position: relative;
+    }
+
+    .about,
+    .projects,
+    .contact,
+    .footer {
+      text-align: center;
+    }
+
+    .about-content,
+    .projects-content {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      max-width: 500px;
+      text-align: left;
+    }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .projects-box {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 10px;
+      width: 280px;
+    }
+
+    .projects-box h3 {
+      color: #ff0057;
+      margin-bottom: 10px;
+    }
+
+    .contact form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact input,
+    .contact textarea {
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+
+    .contact button {
+      background: #ff0057;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .footer {
+      background: #1e1e1e;
+    }
+
+    .socials a {
+      color: #ff0057;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">Portfolio</div>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero container">
+    <div class="hero-text">
+      <h1>
+        Hello, I'm <span>Deenadhayalan B</span>
+      </h1>
+      <p>
+        I'm a Web Developer passionate about crafting clean and elegant user
+        interfaces and writing efficient, modern web applications.
+      </p>
+      <a href="cv.pdf" download class="btn">Download CV</a>
+    </div>
+    <img src="black.jpg" alt="Deenadhayalan B" style="width: 600px; height: 600;">
+  </section>
+
+  <section id="about" class="about container">
+    <div class="about-content">
+      <img
+        src="https://images.unsplash.com/photo-1589156280150-eaebc1f9d99e"
+        alt="About Me"
+      />
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p>
+          I'm Deenadhayalan B, a full-stack developer passionate about building
+          sleek interfaces and efficient web applications. I love solving
+          problems and staying up-to-date with the latest technologies.
+        </p>
+        <p>
+          From front-end design to backend development, I aim to deliver clean,
+          responsive, and scalable solutions.
+        </p>
+        <a href="#projects" class="btn">See Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects container">
+    <h2>My Projects</h2>
+    <div class="projects-content">
+      <div class="projects-box">
+        <h3>A Simple Calculator Website</h3>
+        <p>
+          A lightweight calculator built using HTML, CSS, and JavaScript.
+          Performs basic arithmetic operations with a clean, responsive design.
+        </p>
+        <a href="calci.html" class="btn">View Project</a>
+      </div>
+      <div class="projects-box">
+        <h3>An Interactive Photo Gallery</h3>
+        <p>
+          A dynamic gallery showcasing high-quality images with smooth
+          transitions, lightbox effect, and responsive layout using HTML, CSS,
+          and JS.
+        </p>
+        <a href="pht.html" class="btn">View Project</a>
+      </div>
+      <div class="projects-box">
+        <h3>An English Dictionary Website</h3>
+        <p>
+          Built with JavaScript and an API, this app fetches definitions,
+          phonetics, and examples for English words in real-time.
+        </p>
+        <a href="obj.html" class="btn">View Project</a>
+      </div>
+      <div class="projects-box">
+        <h3>To Do List Web Application</h3>
+        <p>
+          A task management app that allows users to add, delete, and mark
+          tasks as complete. Features a user-friendly interface and persistent
+          local storage.
+        </p>
+        <a href="test.html" class="btn">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact container">
+    <h2>Contact Me</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <section class="footer container">
+    <p>Let Me Get You A Beautiful Website.</p>
+    <a href="#contact" class="btn">Let's Talk</a>
+    <p style="margin-top: 20px;">&copy; 2025 Deenadhayalan B</p>
+    <div class="socials">
+      <a
+        href="https://www.instagram.com/dheena.ftw?igsh=eXJvNjc5Nnh5ZnY5"
+        >Instagram</a
+      >
+      <a
+        href="https://www.linkedin.com/in/deenadhayalan-b-227398300?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+        >LinkedIn</a
+      >
+    </div>
+  </section>
+</body>
+
+</html>

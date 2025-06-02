@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photo Gallery with Captions</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .photo-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+
+    .caption {
+      padding: 12px 15px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .caption h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: #222;
+    }
+
+    .caption p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.3;
+    }
+
+    /* Lightbox overlay */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+      flex-direction: column;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .lightbox.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 70vh;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+      margin-bottom: 15px;
+    }
+
+    .lightbox-caption {
+      color: white;
+      font-size: 18px;
+      max-width: 90%;
+    }
+
+    /* Close button */
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 32px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      font-weight: bold;
+      background: rgba(0,0,0,0.4);
+      padding: 6px 14px;
+      border-radius: 10px;
+      transition: background 0.2s ease;
+      z-index: 1100;
+    }
+
+    .close-btn:hover {
+      background: rgba(0,0,0,0.7);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Photo Gallery with Captions</h1>
+
+  <div class="gallery" id="gallery">
+    <!-- Photo cards will be inserted here by JavaScript -->
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="close-btn" id="closeBtn">&times;</span>
+    <img id="lightboxImg" src="" alt="Expanded View" />
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <script>
+    const photos = [
+      {
+        src: "https://picsum.photos/id/1015/600/400",
+        title: "Majestic Mountain",
+        description: "A breathtaking view of the mountain during sunrise."
+      },
+      {
+        src: "https://picsum.photos/id/1016/600/400",
+        title: "Dense Forest",
+        description: "A lush green forest filled with towering trees."
+      },
+      {
+        src: "https://picsum.photos/id/1018/600/400",
+        title: "Flowing River",
+        description: "A peaceful river flowing through the valley."
+      },
+      {
+        src: "https://picsum.photos/id/1025/600/400",
+        title: "Friendly Dog",
+        description: "A happy dog enjoying the sunny day."
+      },
+      {
+        src: "https://picsum.photos/id/1035/600/400",
+        title: "Sunny Beach",
+        description: "Golden sand and crystal-clear water at the beach."
+      },
+      {
+        src: "https://picsum.photos/id/1039/600/400",
+        title: "City Skyline",
+        description: "A stunning skyline view with skyscrapers at dusk."
+      },
+      {
+        src: "https://picsum.photos/id/1045/600/400",
+        title: "Colorful Sunset",
+        description: "The sky painted in vivid colors during sunset."
+      },
+      {
+        src: "https://picsum.photos/id/1052/600/400",
+        title: "Ancient Bridge",
+        description: "A historic stone bridge over a tranquil river."
+      },
+      {
+        src: "https://picsum.photos/id/1060/600/400",
+        title: "Snowy Peaks",
+        description: "Snow-covered mountain peaks under a clear sky."
+      },
+      {
+        src: "https://picsum.photos/id/1067/600/400",
+        title: "Wildflowers",
+        description: "A field full of vibrant wildflowers in bloom."
+      }
+    ];
+
+    const gallery = document.getElementById('gallery');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeBtn = document.getElementById('closeBtn');
+
+    // Generate photo cards dynamically
+    photos.forEach((photo, index) => {
+      const card = document.createElement('div');
+      card.className = 'photo-card';
+      card.setAttribute('data-index', index);
+
+      card.innerHTML = `
+        <img src="${photo.src}" alt="${photo.title}" />
+        <div class="caption">
+          <h3>${photo.title}</h3>
+          <p>${photo.description}</p>
+        </div>
+      `;
+
+      card.addEventListener('click', () => {
+        showLightbox(index);
+      });
+
+      gallery.appendChild(card);
+    });
+
+    function showLightbox(index) {
+      const photo = photos[index];
+      lightboxImg.src = photo.src;
+      lightboxImg.alt = photo.title;
+      lightboxCaption.textContent = `${photo.title} — ${photo.description}`;
+      lightbox.classList.add('visible');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('visible');
+      lightboxImg.src = '';
+      lightboxImg.alt = '';
+      lightboxCaption.textContent = '';
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('visible')) {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
